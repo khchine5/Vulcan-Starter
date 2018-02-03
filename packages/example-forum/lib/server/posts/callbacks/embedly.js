@@ -4,8 +4,8 @@ Callbacks to add media/thumbnail after submit and on edit
 
 */
 
-import { addCallback, getSetting, registerSetting } from 'meteor/vulcan:core';
-import Embed from 'meteor/vulcan:embed';
+import { addCallback, getSetting } from 'meteor/vulcan:core';
+import { Embed } from 'meteor/vulcan:embed';
 
 const embedProvider = getSetting('embedProvider');
 
@@ -73,6 +73,8 @@ function updateMediaOnEdit (modifier, post) {
   return modifier;
 }
 addCallback('posts.edit.sync', updateMediaOnEdit);
+
+const addMediaAfterSubmit = AddMediaAfterSubmit;
 
 const regenerateThumbnail = function (post) {
   delete post.thumbnailUrl;

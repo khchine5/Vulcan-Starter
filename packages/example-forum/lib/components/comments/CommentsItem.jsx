@@ -22,7 +22,6 @@ class CommentsItem extends PureComponent {
   }
 
   replyCancelCallback(event) {
-    event.preventDefault();
     this.setState({showReply: false});
   }
 
@@ -36,7 +35,6 @@ class CommentsItem extends PureComponent {
   }
 
   editCancelCallback(event) {
-    event.preventDefault();
     this.setState({showEdit: false});
   }
 
@@ -125,6 +123,7 @@ class CommentsItem extends PureComponent {
 CommentsItem.propTypes = {
   comment: PropTypes.object.isRequired, // the current comment
   currentUser: PropTypes.object,
+  flash: PropTypes.func,
 };
 
 CommentsItem.contextTypes = {
@@ -132,4 +131,4 @@ CommentsItem.contextTypes = {
   intl: intlShape
 };
 
-registerComponent('CommentsItem', CommentsItem);
+registerComponent('CommentsItem', CommentsItem, withMessages);

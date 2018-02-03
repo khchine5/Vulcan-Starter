@@ -1,4 +1,4 @@
-import { Components, registerComponent, withCurrentUser, withMutation, withMessages, Utils } from 'meteor/vulcan:core';
+import { Components, registerComponent, withCurrentUser, withMutation, withMessages } from 'meteor/vulcan:core';
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, intlShape } from 'meteor/vulcan:i18n';
@@ -17,8 +17,14 @@ class Newsletter extends PureComponent {
     this.dismissBanner = this.dismissBanner.bind(this);
 
     this.state = {
-      showBanner: showBanner(props.currentUser)
+      showBanner: false
     };
+  }
+
+  componentDidMount() {
+    this.setState({
+      showBanner: showBanner(this.props.currentUser)
+    });
   }
 
   componentWillReceiveProps(nextProps, nextContext) {

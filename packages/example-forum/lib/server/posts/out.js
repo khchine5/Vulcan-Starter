@@ -14,10 +14,7 @@ Picker.route('/out', ({ query}, req, res, next) => {
 
     try {
 
-      // decode url just in case
-      const decodedUrl = decodeURIComponent(query.url);
-
-      const post = Posts.findOne({url: {$regex: escapeStringRegexp(decodedUrl)}}, {sort: {postedAt: -1, createdAt: -1}});
+      const post = Posts.findOne({url: {$regex: escapeStringRegexp(query.url)}}, {sort: {postedAt: -1, createdAt: -1}});
 
       if (post) {
         const ip = req.headers && req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -31,9 +28,12 @@ Picker.route('/out', ({ query}, req, res, next) => {
         res.end(`Invalid URL: ${query.url}`);
       }
     } catch (error) {
-      console.log('// /out error')
-      console.log(error)
-      console.log(query)
+      // eslint-disable-next-line no-console
+      console.log('// /out error');
+      // eslint-disable-next-line no-console
+      console.log(error);
+      // eslint-disable-next-line no-console
+      console.log(query);
     }
   } else {
     res.end("Please provide a URL");
